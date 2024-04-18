@@ -18,10 +18,11 @@ Este repositório contém o código-fonte do frontend desenvolvido em React util
 
 ## Tecnologias Utilizadas
 - React
-- Vite
+- Nextjs
 - HTML
 - CSS
 - JavaScript
+- Tailwindcss
 
 ## Instruções de Uso
 1. Clone este repositório
