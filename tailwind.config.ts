@@ -24,7 +24,7 @@ const config: Config = {
         brand300: "#F2B2EC",
         brand200: "#ecbee7",
         brand100: "#f5def3",
-        brand0: "#D8E5FF",
+        brand0: "#f3e0f1",
         neutral900: "#212529",
         neutral800: "#343a40",
         neutral700: "#495057",

@@ -17,7 +17,7 @@ export default function Login() {
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await validateLogin.mutateAsync(data);
     console.log({ res });
-    if (res?.login) return router.push("/dashboard");
+    if (res?.login) return router.push("/clients");
 
     setError("usuario", { message: res?.mensagem });
   };
@@ -33,7 +33,11 @@ export default function Login() {
           label={"e-mail"}
           placeholder="Digite seu e-mail"
           {...register("usuario")}
-          error={{ description: errors?.usuario?.message || "" }}
+          error={
+            errors?.usuario?.message
+              ? { description: errors?.usuario?.message }
+              : undefined
+          }
         />
         <PasswordInput grow label={"senha"} {...register("senha")} />
       </div>
