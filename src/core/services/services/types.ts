@@ -1,9 +1,9 @@
 export type Service = {
-  id: string;
+  servicoId: string;
   nomeServico: string;
   valorServico: number;
 };
 
-export type CreateService = Omit<Service, "id">;
+export type CreateService = Omit<Service, "servicoId">;
 
 export type UpdateService = Partial<CreateService>;

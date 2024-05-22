@@ -1,9 +1,9 @@
 export type Client = {
-  id: string;
+  clienteId: string;
   nomeCliente: string;
-  numeroTelefone: number;
+  numeroTelefone: string;
 };
 
-export type CreateClient = Omit<Client, "id">;
+export type CreateClient = Omit<Client, "clienteId">;
 
 export type UpdateClient = Partial<CreateClient>;

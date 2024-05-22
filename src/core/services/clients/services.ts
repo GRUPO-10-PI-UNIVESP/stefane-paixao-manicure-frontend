@@ -1,7 +1,7 @@
 import axiosInstance from "@/core/configs/axios";
 import { Client, CreateClient, UpdateClient } from "./types";
 
-const URL_CONTROLLER = `/servico`;
+const URL_CONTROLLER = `/cliente`;
 
 const routes = {
   async createClient(params: CreateClient) {
@@ -11,9 +11,9 @@ const routes = {
     return result?.data;
   },
 
-  async updateClient(serviceId: string, params: UpdateClient) {
+  async updateClient(clienteId: string, params: UpdateClient) {
     const result = await axiosInstance.patch<Client>(
-      `${URL_CONTROLLER}/${serviceId}`,
+      `${URL_CONTROLLER}/${clienteId}`,
       {
         ...params,
       }
@@ -21,14 +21,15 @@ const routes = {
     return result?.data;
   },
 
-  async deleteClient(serviceId: string) {
-    const result = await axiosInstance.delete(`${URL_CONTROLLER}/${serviceId}`);
+  async deleteClient(clienteId: string) {
+    console.log({ clienteId });
+    const result = await axiosInstance.delete(`${URL_CONTROLLER}/${clienteId}`);
     return result?.data;
   },
 
-  async getClient(serviceId: string) {
+  async getClient(clienteId: string) {
     const result = await axiosInstance.get<Client>(
-      `${URL_CONTROLLER}/${serviceId}`
+      `${URL_CONTROLLER}/${clienteId}`
     );
     return result?.data;
   },

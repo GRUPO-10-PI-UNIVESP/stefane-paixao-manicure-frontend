@@ -1,55 +1,70 @@
-import { useMutation, useQuery } from "react-query";
-import servicoClient from "./services";
-import { CreateClient, Client, UpdateClient } from "./types";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import clienteClient from "@/core/services/clients/services";
+import {
+  Client,
+  CreateClient,
+  UpdateClient,
+} from "@/core/services/clients/types";
 
-const QUERY_KEY = "login";
+const QUERY_KEY = "getAllClients";
 
 export function useCreateClient() {
-  return useMutation<Client, Error, CreateClient>(servicoClient.createClient, {
+  const queryClient = useQueryClient();
+
+  return useMutation<Client, Error, CreateClient>(clienteClient.createClient, {
     onSuccess(data) {
-      console.log(data, "Success");
+      console.log("CreateClient onSuccess", data);
+      queryClient.invalidateQueries(QUERY_KEY, { exact: true });
+      queryClient.refetchQueries(QUERY_KEY, { exact: true });
     },
     onError(error) {
-      console.log(error);
+      console.error("CreateClient onError", error);
     },
   });
 }
 
 export function useUpdateClient() {
-  return useMutation<Client, Error, { servicoId: string; data: UpdateClient }>(
-    ({ servicoId, data }) => servicoClient.updateClient(servicoId, data),
+  const queryClient = useQueryClient();
+  return useMutation<Client, Error, { clienteId: string; data: UpdateClient }>(
+    ({ clienteId, data }) => clienteClient.updateClient(clienteId, data),
     {
       onSuccess(data) {
-        console.log(data, "Success");
+        console.log("UpdateClient onSuccess", data);
+        queryClient.invalidateQueries(QUERY_KEY, { exact: true });
+        queryClient.refetchQueries(QUERY_KEY, { exact: true });
       },
       onError(error) {
-        console.log(error);
+        console.error("UpdateClient onError", error);
       },
     }
   );
 }
 
 export function useDeleteClient() {
-  return useMutation<unknown, Error, string>(servicoClient.deleteClient, {
+  const queryClient = useQueryClient();
+
+  return useMutation(clienteClient.deleteClient, {
     onSuccess(data) {
-      console.log(data, "Success");
+      console.log("DeleteClient onSuccess", data);
+      queryClient.invalidateQueries(QUERY_KEY, { exact: true });
+      queryClient.refetchQueries(QUERY_KEY, { exact: true });
     },
     onError(error) {
-      console.log(error);
+      console.error("DeleteClient onError", error);
     },
   });
 }
 
-export function useGetClient(servicoId: string) {
+export function useGetClient(clienteId: string) {
   return useQuery<Client, Error>(
-    [`getClient`, servicoId],
-    () => servicoClient.getClient(servicoId),
+    [`getClient`, clienteId],
+    () => clienteClient.getClient(clienteId),
     {
       onSuccess(data) {
-        console.log(data, "Success");
+        console.log("GetClient onSuccess", data);
       },
       onError(error) {
-        console.log(error);
+        console.error("GetClient onError", error);
       },
     }
   );
@@ -57,14 +72,13 @@ export function useGetClient(servicoId: string) {
 
 export function useGetAllClients() {
   return useQuery<Client[], Error>(
-    `getAllClients`,
-    servicoClient.getAllClients,
+    [QUERY_KEY],
+    () => clienteClient.getAllClients(),
     {
-      onSuccess(data) {
-        console.log(data, "Success");
-      },
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
       onError(error) {
-        console.log(error);
+        console.error("GetAllClients onError", error);
       },
     }
   );
