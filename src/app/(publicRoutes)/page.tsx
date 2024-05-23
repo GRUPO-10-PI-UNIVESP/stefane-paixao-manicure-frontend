@@ -16,9 +16,10 @@ export default function Login() {
   } = useForm<ILogin>();
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await validateLogin.mutateAsync(data);
-    console.log({ res });
-    if (res?.login) return router.push("/clients");
-
+    if (res?.login) {
+      document.cookie = `isLoggedIn=${res.login.loginId?.toString() || ""}`;
+      return router.push("/clients");
+    }
     setError("usuario", { message: res?.mensagem });
   };
 

@@ -1,41 +1,137 @@
-import { PageContainer } from "@/components/common/PageContainer";
-import { Button, Table } from "@stick-ui/lib";
-import React from "react";
+"use client";
+import {
+  AddOrEditAppointmentModal,
+  ExcludeAppointmentModal,
+} from "@/components/appointments";
+import { PageContainer } from "@/components/_common/PageContainer";
+import { Appointment } from "@/core/services/appointments/types";
+import { useGetAllClients } from "@/core/services/clients/hooks";
+import { useGetAllServices } from "@/core/services/services/hooks";
+import { ActionIcon, Button, Heading, Table, Text } from "@stick-ui/lib";
+import React, { useState } from "react";
+import { useGetAllAppointments } from "@/core/services/appointments/hooks";
 
 const Appointments = () => {
-  const appointments = [];
+  const services = useGetAllServices();
+  const clients = useGetAllClients();
+  const appointments = useGetAllAppointments();
 
-  return (
-    <PageContainer
-      title={"Atendimentos"}
-      subtitle={"Gerencie todos os seus atendimentos"}
-      actionButton={
-        <Button
-          size="sm"
-          iconProps={{ iconName: "add", iconPosition: "left" }}
-          label="Novo Atendimento"
-        />
+  const [modalType, setModalType] = useState<string>();
+  const [selectedAppointment, setSelectedAppointment] = useState<Appointment>();
+
+  const openModal = (type: string, appointment?: Appointment) => {
+    setModalType(type);
+    setSelectedAppointment(appointment);
+  };
+
+  const closeModal = () => {
+    setModalType(undefined);
+    setSelectedAppointment(undefined);
+    appointments.refetch();
+  };
+
+  const groupedAppointments = appointments.data?.reduce(
+    (groups, appointment) => {
+      const date = appointment.dataFormatada.data;
+      if (!groups[date]) {
+        groups[date] = [];
       }
-    >
-      <div className="bg-white p-4">
-        {appointments?.map((day) => (
-          <div key={day.date} className="mb-8">
-            <h3 className="text-lg font-semibold text-brand500 mb-2">
-              {day.date}
-            </h3>
-            <Table
-              columns={[]}
-              data={[]}
-              emptyValues={{
-                title: "Não há atendimentos marcados",
-                subTitle:
-                  "Clique no botão acima para agendar um novo atendimento",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-    </PageContainer>
+      groups[date].push(appointment);
+      return groups;
+    },
+    {}
+  );
+  return (
+    <>
+      <PageContainer
+        title={"Atendimentos"}
+        subtitle={"Gerencie todos os seus atendimentos"}
+        actionButton={
+          <Button
+            size="sm"
+            iconProps={{ iconName: "add", iconPosition: "left" }}
+            label="Novo Atendimento"
+            onClick={() => setModalType("edit")}
+          />
+        }
+      >
+        <div className="bg-white flex flex-col gap-4 ">
+          {appointments.isLoading && <p>Carregando...</p>}
+          {appointments.isError && (
+            <p>Ocorreu um erro ao carregar os atendimentos</p>
+          )}
+
+          {!appointments.isLoading &&
+            !appointments.isError &&
+            groupedAppointments &&
+            Object.keys(groupedAppointments).map((date) => (
+              <div key={date} className="flex flex-col gap-4">
+                <Text size="md" weight="bold" color="text-brand500">
+                  {date}
+                </Text>
+
+                <Table
+                  columns={[
+                    {
+                      index: "cliente",
+                      label: "Cliente",
+                      render: (data) => data.cliente.nomeCliente,
+                    },
+                    {
+                      index: "servico",
+                      label: "Serviço",
+                      render: (data) =>
+                        data.atendimentoHasServico
+                          .map((servico) => servico.servico.nomeServico)
+                          .join(", "),
+                    },
+                    {
+                      index: "horaInicial",
+                      label: "Hora",
+                      render: (data) => data.dataFormatada.horaInicial,
+                    },
+                    {
+                      index: "actions",
+                      label: "Ações",
+                      align: "center",
+                      width: "100px",
+                      render: (data) => (
+                        <div className="flex items-center flex-row">
+                          <ActionIcon
+                            iconName="edit-box"
+                            variant="subtle"
+                            size="xs"
+                            onClick={() => openModal("edit", data)}
+                          />
+                          <ActionIcon
+                            iconName="trash"
+                            variant="subtle"
+                            size="xs"
+                            onClick={() => openModal("exclude", data)}
+                          />
+                        </div>
+                      ),
+                    },
+                  ]}
+                  data={groupedAppointments[date]}
+                />
+              </div>
+            ))}
+        </div>
+      </PageContainer>
+      <AddOrEditAppointmentModal
+        selectedAppointment={selectedAppointment}
+        isOpen={modalType === "edit"}
+        onClose={closeModal}
+        clients={clients.data || []}
+        services={services.data || []}
+      />
+      <ExcludeAppointmentModal
+        isOpen={modalType === "exclude"}
+        id={selectedAppointment?.atendimentoId || 0}
+        onClose={closeModal}
+      />
+    </>
   );
 };
 

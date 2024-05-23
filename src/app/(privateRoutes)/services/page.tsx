@@ -3,7 +3,7 @@ import {
   AddOrEditServiceModal,
   ExcludeServiceModal,
 } from "@/components/services";
-import { PageContainer } from "@/components/common/PageContainer";
+import { PageContainer } from "@/components/_common/PageContainer";
 import { useGetAllServices } from "@/core/services/services/hooks";
 import { Service } from "@/core/services/services/types";
 import {

@@ -22,7 +22,6 @@ const routes = {
   },
 
   async deleteClient(clienteId: string) {
-    console.log({ clienteId });
     const result = await axiosInstance.delete(`${URL_CONTROLLER}/${clienteId}`);
     return result?.data;
   },

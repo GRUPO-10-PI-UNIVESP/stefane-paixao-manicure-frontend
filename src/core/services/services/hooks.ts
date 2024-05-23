@@ -64,6 +64,8 @@ export function useGetAllServices() {
     `getAllServices`,
     servicoService.getAllServices,
     {
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
       onSuccess(data) {
         console.log(data, "Success");
       },

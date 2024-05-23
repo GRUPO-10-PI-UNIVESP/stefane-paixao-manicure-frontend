@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@stick-ui/lib':
-    specifier: ^1.15.0
-    version: 1.15.0(react@18.2.0)
+    specifier: ^1.15.2
+    version: 1.15.2(react@18.2.0)
   axios:
     specifier: ^1.7.0
     version: 1.7.0
@@ -293,8 +293,8 @@ packages:
     resolution: {integrity: sha512-hw437iINopmQuxWPSUEvqE56NCPsiU8N4AYtfHmJFckclktzK9YQJieD3XkDCDH4OjL+C7zgPUh73R/nrcHrqw==}
     dev: true
 
-  /@stick-ui/lib@1.15.0(react@18.2.0):
-    resolution: {integrity: sha512-IOByw47m3aeI0E5OPFG8jliI/wMRhK//9AjuHpcSf+sJ2pyI5KZtAMOak8spe51CuqhTT5eYdc3+h8sj0c7p1w==}
+  /@stick-ui/lib@1.15.2(react@18.2.0):
+    resolution: {integrity: sha512-E+ypEQs59VZRf/OcTx5kvyVMw11zNuuNQKKj4T2HYKTXBJ9/VbFSE5Y+4z9q1NFW9z0eZx1XenVAvoRYCOhRcw==}
     peerDependencies:
       react: ^18.2.0
     dependencies:

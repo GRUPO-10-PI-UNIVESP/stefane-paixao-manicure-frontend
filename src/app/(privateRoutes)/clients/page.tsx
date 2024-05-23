@@ -1,6 +1,6 @@
 "use client";
 import { AddOrEditClientModal, ExcludeClientModal } from "@/components/clients";
-import { PageContainer } from "@/components/common/PageContainer";
+import { PageContainer } from "@/components/_common/PageContainer";
 import { useGetAllClients } from "@/core/services/clients/hooks";
 import { Client } from "@/core/services/clients/types";
 import {

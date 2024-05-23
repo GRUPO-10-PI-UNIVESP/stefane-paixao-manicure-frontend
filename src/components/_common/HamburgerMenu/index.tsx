@@ -2,10 +2,12 @@
 
 import { ActionIcon, Button, Icon } from "@stick-ui/lib";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const HamburgerMenu = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const router = useRouter();
   const sideBarItems = [
     {
       subItems: [
@@ -60,6 +62,10 @@ export const HamburgerMenu = () => {
                       iconPosition: "left",
                     }}
                     label={subItem.label}
+                    onClick={() => {
+                      router.push(subItem.path);
+                      setIsOpened(false);
+                    }}
                   />
                 </div>
               ))}
