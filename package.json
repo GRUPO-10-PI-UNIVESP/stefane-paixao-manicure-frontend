@@ -11,6 +11,7 @@
   "dependencies": {
     "@stick-ui/lib": "^1.15.2",
     "axios": "^1.7.0",
+    "date-fns": "^3.6.0",
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18",

@@ -70,14 +70,18 @@ const Clients = () => {
           />
         }
       >
-        <Table<Client>
-          columns={columns}
-          data={clients.data || []}
-          emptyValues={{
-            title: "Ainda não há clientes cadastrados",
-            subTitle: "Clique em 'Novo Cliente' para criar um novo.",
-          }}
-        />
+        {clients.isLoading && <p>Carregando...</p>}
+        {clients.isError && <p>Ocorreu um erro ao carregar os clientes</p>}
+        {!clients.isLoading && !clients.isError && (
+          <Table<Client>
+            columns={columns}
+            data={clients.data || []}
+            emptyValues={{
+              title: "Ainda não há clientes cadastrados",
+              subTitle: "Clique em 'Novo Cliente' para criar um novo.",
+            }}
+          />
+        )}
       </PageContainer>
 
       <AddOrEditClientModal

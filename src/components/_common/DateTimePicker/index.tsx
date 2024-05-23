@@ -36,8 +36,12 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
   useEffect(() => {
     if (onChange && date && time) {
-      const isoDateTime = new Date(`${date}T${time}:00.000Z`).toISOString();
-      onChange(isoDateTime);
+      const isoDateTime = new Date(
+        `${date}T${
+          !!time && time !== ":undefined" ? time : "00:00"
+        }:00.000-03:00`
+      );
+      onChange(isoDateTime.toISOString());
     }
   }, [date, time, onChange]);
 
@@ -73,7 +77,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           className={`mt-2 px-4 py-2 border ${
             dateError ? "border-red-500" : "border-gray-300"
           } rounded-md shadow-sm focus:outline-none focus:ring-2 ${
-            dateError ? "focus:ring-red-500" : "focus:ring-brand-500"
+            dateError ? "focus:ring-red-500" : "focus:ring-brand500"
           } focus:border-transparent`}
           aria-invalid={!!dateError}
           aria-describedby="dateError"
@@ -101,7 +105,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           className={`mt-2 px-4 py-2 border w-full ${
             timeError ? "border-red-500" : "border-gray-300"
           } rounded-md shadow-sm focus:outline-none focus:ring-2 ${
-            timeError ? "focus:ring-red-500" : "focus:ring-brand-500"
+            timeError ? "focus:ring-red-500" : "focus:ring-brand500"
           } focus:border-transparent`}
           aria-invalid={!!timeError}
           aria-describedby="timeError"

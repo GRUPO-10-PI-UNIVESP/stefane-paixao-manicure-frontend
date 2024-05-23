@@ -51,6 +51,7 @@ export const AddOrEditAppointmentModal = ({
   useEffect(() => {
     if (selectedAppointment !== undefined) {
       setValue("clienteId", Number(selectedAppointment?.clienteId));
+      setValue("agendaId", Number(selectedAppointment?.agendaId));
       setValue(
         "servicoId",
         selectedAppointment?.atendimentoHasServico[0].servicoId
@@ -60,7 +61,6 @@ export const AddOrEditAppointmentModal = ({
       reset();
     }
   }, [selectedAppointment]);
-
   return (
     <Modal
       contentWidth={400}
@@ -110,10 +110,10 @@ export const AddOrEditAppointmentModal = ({
             <DateTimePicker
               dateLabel="Data"
               initialDate={
-                selectedAppointment?.agenda.dataHoraInicial.split("T")[0]
+                selectedAppointment?.agenda.dataHoraInicial.split("T")[0] || ""
               }
               initialTime={
-                selectedAppointment?.agenda.dataHoraInicial.split("T")[1]
+                selectedAppointment?.agenda.dataHoraInicial.split("T")[1] || ""
               }
               timeLabel="Hora"
               onChange={(date) => {

@@ -33,6 +33,7 @@ export interface Appointment {
 export type CreateAppointment = {
   clienteId: number;
   servicoId: number;
+  agendaId?: number;
   dataHoraInicial: string;
   dataHoraFinal: string;
 };

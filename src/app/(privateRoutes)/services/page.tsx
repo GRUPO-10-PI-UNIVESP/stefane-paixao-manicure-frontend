@@ -78,14 +78,18 @@ const Services = () => {
           />
         }
       >
-        <Table<Service>
-          columns={columns}
-          data={services.data || []}
-          emptyValues={{
-            title: "Ainda não há servicos cadastrados",
-            subTitle: "Clique em 'Novo Servico' para criar um novo.",
-          }}
-        />
+        {services.isLoading && <p>Carregando...</p>}
+        {services.isError && <p>Ocorreu um erro ao carregar os clientes</p>}
+        {!services.isLoading && !services.isError && (
+          <Table<Service>
+            columns={columns}
+            data={services.data || []}
+            emptyValues={{
+              title: "Ainda não há servicos cadastrados",
+              subTitle: "Clique em 'Novo Servico' para criar um novo.",
+            }}
+          />
+        )}
       </PageContainer>
 
       <AddOrEditServiceModal

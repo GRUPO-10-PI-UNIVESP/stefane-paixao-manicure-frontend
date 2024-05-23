@@ -7,9 +7,11 @@ import { PageContainer } from "@/components/_common/PageContainer";
 import { Appointment } from "@/core/services/appointments/types";
 import { useGetAllClients } from "@/core/services/clients/hooks";
 import { useGetAllServices } from "@/core/services/services/hooks";
-import { ActionIcon, Button, Heading, Table, Text } from "@stick-ui/lib";
+import { ActionIcon, Button, Table, Text } from "@stick-ui/lib";
 import React, { useState } from "react";
 import { useGetAllAppointments } from "@/core/services/appointments/hooks";
+import { format, parse } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const Appointments = () => {
   const services = useGetAllServices();
@@ -33,6 +35,7 @@ const Appointments = () => {
   const groupedAppointments = appointments.data?.reduce(
     (groups, appointment) => {
       const date = appointment.dataFormatada.data;
+
       if (!groups[date]) {
         groups[date] = [];
       }
@@ -41,6 +44,15 @@ const Appointments = () => {
     },
     {}
   );
+
+  const sortedDates = groupedAppointments
+    ? Object.keys(groupedAppointments).sort((a, b) => {
+        const dateA = parse(a, "dd/MM/yyyy", new Date());
+        const dateB = parse(b, "dd/MM/yyyy", new Date());
+        return dateB - dateA;
+      })
+    : [];
+
   return (
     <>
       <PageContainer
@@ -64,7 +76,7 @@ const Appointments = () => {
           {!appointments.isLoading &&
             !appointments.isError &&
             groupedAppointments &&
-            Object.keys(groupedAppointments).map((date) => (
+            sortedDates.map((date) => (
               <div key={date} className="flex flex-col gap-4">
                 <Text size="md" weight="bold" color="text-brand500">
                   {date}
