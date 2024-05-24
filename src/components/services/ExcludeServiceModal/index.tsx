@@ -43,7 +43,7 @@ export const ExcludeServiceModal = ({
           />
           <Button
             size="xs"
-            label="Excluir Usuário"
+            label="Excluir Serviço"
             grow
             onClick={() => handleRemove()}
           />

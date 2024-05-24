@@ -87,11 +87,14 @@ const Appointments = () => {
                     {
                       index: "cliente",
                       label: "Cliente",
+                      width: "200px",
+
                       render: (data) => data.cliente.nomeCliente,
                     },
                     {
                       index: "servico",
                       label: "Serviço",
+                      width: "50%",
                       render: (data) =>
                         data.atendimentoHasServico
                           .map((servico) => servico.servico.nomeServico)

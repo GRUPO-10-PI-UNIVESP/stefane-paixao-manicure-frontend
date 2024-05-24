@@ -16,7 +16,7 @@ export default function AuthLayout({
         <HamburgerMenu />
       </div>
       <div className="w-full overflow-y-auto bg-neutral0 px-4 py-4">
-        <div className="bg-white rounded-lg h-full px-4 py-6">{children}</div>
+        <div className="bg-white rounded-lg px-4 py-6">{children}</div>
       </div>
     </main>
   );

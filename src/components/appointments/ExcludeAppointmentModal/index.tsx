@@ -22,14 +22,14 @@ export const ExcludeAppointmentModal = ({
   return (
     <Modal
       contentWidth={400}
-      title="Excluir Serviço"
+      title="Excluir Atendimento"
       isOpen={isOpen}
       onClose={() => onClose()}
     >
       <div className="flex flex-col w-full gap-6">
         <div>
           <Text size="sm">
-            Você tem certeza que gostaria de excluir esse serviço? Todos os
+            Você tem certeza que gostaria de excluir esse atendimento? Todos os
             dados serão perdidos
           </Text>
         </div>
@@ -43,7 +43,7 @@ export const ExcludeAppointmentModal = ({
           />
           <Button
             size="xs"
-            label="Excluir Usuário"
+            label="Excluir Atendimento"
             grow
             onClick={() => handleRemove()}
           />
