@@ -7,21 +7,25 @@ import { PageContainer } from "@/components/_common/PageContainer";
 import { Appointment } from "@/core/services/appointments/types";
 import { useGetAllClients } from "@/core/services/clients/hooks";
 import { useGetAllServices } from "@/core/services/services/hooks";
-import { ActionIcon, Button, Table, Text } from "@stick-ui/lib";
+import { ActionIcon, Button, Loader, Table, Text } from "@istic-ui/react";
 import React, { useState } from "react";
 import { useGetAllAppointments } from "@/core/services/appointments/hooks";
-import { format, parse } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { parse } from "date-fns";
+
+enum ModalType {
+  Edit = "edit",
+  Exclude = "exclude",
+}
 
 const Appointments = () => {
   const services = useGetAllServices();
   const clients = useGetAllClients();
   const appointments = useGetAllAppointments();
 
-  const [modalType, setModalType] = useState<string>();
+  const [modalType, setModalType] = useState<ModalType>();
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment>();
 
-  const openModal = (type: string, appointment?: Appointment) => {
+  const openModal = (type: ModalType, appointment?: Appointment) => {
     setModalType(type);
     setSelectedAppointment(appointment);
   };
@@ -63,12 +67,16 @@ const Appointments = () => {
             size="sm"
             iconProps={{ iconName: "add", iconPosition: "left" }}
             label="Novo Atendimento"
-            onClick={() => setModalType("edit")}
+            onClick={() => setModalType(ModalType.Edit)}
           />
         }
       >
         <div className="bg-white flex flex-col gap-4 ">
-          {appointments.isLoading && <p>Carregando...</p>}
+          {appointments.isLoading && (
+            <div className="w-full h-[80dvh] flex items-center justify-center">
+              <Loader width="bold" size="xl" color="border-brand500" />
+            </div>
+          )}
           {appointments.isError && (
             <p>Ocorreu um erro ao carregar os atendimentos</p>
           )}
@@ -82,7 +90,7 @@ const Appointments = () => {
                   {date}
                 </Text>
 
-                <Table
+                <Table<Appointment>
                   columns={[
                     {
                       index: "cliente",
@@ -116,13 +124,13 @@ const Appointments = () => {
                             iconName="edit-box"
                             variant="subtle"
                             size="xs"
-                            onClick={() => openModal("edit", data)}
+                            onClick={() => openModal(ModalType.Edit, data)}
                           />
                           <ActionIcon
                             iconName="trash"
                             variant="subtle"
                             size="xs"
-                            onClick={() => openModal("exclude", data)}
+                            onClick={() => openModal(ModalType.Exclude, data)}
                           />
                         </div>
                       ),
@@ -136,13 +144,13 @@ const Appointments = () => {
       </PageContainer>
       <AddOrEditAppointmentModal
         selectedAppointment={selectedAppointment}
-        isOpen={modalType === "edit"}
+        isOpen={modalType === ModalType.Edit}
         onClose={closeModal}
         clients={clients.data || []}
         services={services.data || []}
       />
       <ExcludeAppointmentModal
-        isOpen={modalType === "exclude"}
+        isOpen={modalType === ModalType.Exclude}
         id={selectedAppointment?.atendimentoId || 0}
         onClose={closeModal}
       />

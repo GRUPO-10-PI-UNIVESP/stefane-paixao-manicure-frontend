@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionIcon, Button, Icon } from "@stick-ui/lib";
+import { ActionIcon, Button, Icon } from "@istic-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 "use client";
 import { useDeleteClient } from "@/core/services/clients/hooks";
-import { Button, Modal, Text } from "@stick-ui/lib";
+import { Button, Modal, Text } from "@istic-ui/react";
 
 interface ExcludeClientModalProps {
   isOpen: boolean;

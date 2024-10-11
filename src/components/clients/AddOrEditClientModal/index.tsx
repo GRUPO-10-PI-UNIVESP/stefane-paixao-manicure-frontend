@@ -5,7 +5,7 @@ import {
   useUpdateClient,
 } from "@/core/services/clients/hooks";
 import { Client } from "@/core/services/clients/types";
-import { Button, Modal, TextInput } from "@stick-ui/lib";
+import { Button, Modal, TextInput } from "@istic-ui/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -71,13 +71,13 @@ export const AddOrEditClientModal = ({
 
           <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral100">
             <Button
-              size="xs"
+              size="md"
               variant="outline"
               label="Cancelar"
               onClick={() => onClose()}
             />
             <Button
-              size="xs"
+              size="md"
               label={`${isEdit ? "Atualizar" : "Cadastrar"} Cliente`}
               type="submit"
             />

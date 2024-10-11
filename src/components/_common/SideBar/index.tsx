@@ -1,5 +1,5 @@
 "use client";
-import { Icon, SideBar, Text } from "@stick-ui/lib";
+import { Icon, SideBar, Text } from "@istic-ui/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -18,6 +18,11 @@ export const Sidebar = () => {
           label: "Serviços",
           path: "/services",
           icon: <Icon name="survey" />,
+        },
+        {
+          label: "Filiais",
+          path: "/branches",
+          icon: <Icon name="home" />,
         },
         {
           label: "Atendimento",

@@ -10,9 +10,10 @@ import {
   ActionIcon,
   Button,
   DropdownMenu,
+  Loader,
   Table,
   TableColumn,
-} from "@stick-ui/lib";
+} from "@istic-ui/react";
 import React, { useState } from "react";
 
 const Services = () => {
@@ -48,12 +49,14 @@ const Services = () => {
         <DropdownMenu
           items={[
             {
+              id: "edit",
               iconName: "edit-box",
               label: "Editar",
               onClick: () => openModal("edit", data),
             },
 
             {
+              id: "exclude",
               iconName: "trash",
               label: "Excluir",
               onClick: () => openModal("exclude", data),
@@ -67,8 +70,8 @@ const Services = () => {
   return (
     <>
       <PageContainer
-        title={"Servicos"}
-        subtitle={"Gerencie todos os seus servicos"}
+        title={"Serviços"}
+        subtitle={"Gerencie todos os seus serviços"}
         actionButton={
           <Button
             size="sm"
@@ -78,14 +81,19 @@ const Services = () => {
           />
         }
       >
-        {services.isLoading && <p>Carregando...</p>}
+        {services.isLoading && (
+          <div className="w-full h-[80dvh] flex items-center justify-center">
+            <Loader width="bold" size="xl" color="border-brand500" />
+          </div>
+        )}
         {services.isError && <p>Ocorreu um erro ao carregar os clientes</p>}
         {!services.isLoading && !services.isError && (
           <Table<Service>
+            minHeight="calc(100vh - 125px)"
             columns={columns}
             data={services.data || []}
             emptyValues={{
-              title: "Ainda não há servicos cadastrados",
+              title: "Ainda não há serviços cadastrados",
               subTitle: "Clique em 'Novo Servico' para criar um novo.",
             }}
           />
