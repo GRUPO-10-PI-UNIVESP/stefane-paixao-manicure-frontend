@@ -1,6 +1,7 @@
 export interface Appointment {
   atendimentoId: number;
   clienteId: number;
+  filialId: number;
   agendaId: number;
   valorTotal: string;
   cliente: {
@@ -31,6 +32,7 @@ export interface Appointment {
 }
 
 export type CreateAppointment = {
+  filialId: number;
   clienteId: number;
   servicoId: number;
   agendaId?: number;

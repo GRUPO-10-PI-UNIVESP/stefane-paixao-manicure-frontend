@@ -1,9 +1,16 @@
 export type Branch = {
-  servicoId: string;
-  nomeServico: string;
-  valorServico: number;
+  filialId: string;
+  nomeFilial: string;
+  address: {
+    street: string;
+    number: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
 };
 
-export type CreateBranch = Omit<Branch, "servicoId">;
+export type CreateBranch = Omit<Branch, "filialId">;
 
 export type UpdateBranch = Partial<CreateBranch>;

@@ -148,6 +148,7 @@ const Appointments = () => {
         onClose={closeModal}
         clients={clients.data || []}
         services={services.data || []}
+        branches={[]}
       />
       <ExcludeAppointmentModal
         isOpen={modalType === ModalType.Exclude}

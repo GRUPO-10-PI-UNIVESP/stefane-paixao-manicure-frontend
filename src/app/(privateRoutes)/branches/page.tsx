@@ -36,10 +36,16 @@ const Branches = () => {
       label: "Nome",
     },
     {
-      index: "valorServico",
-      label: "Valor",
-      render: ({ valorServico }) =>
-        `R$ ${Number(valorServico)?.toFixed(2) || 0}`,
+      index: "address",
+      label: "Endereço",
+      render: ({ address }) =>
+        address ? (
+          <p>
+            {`${address.street}, ${address.number} - ${address.neighborhood}`}
+          </p>
+        ) : (
+          <p>Endereço não informado</p>
+        ),
     },
     {
       index: "actions",
@@ -107,7 +113,7 @@ const Branches = () => {
       />
       <ExcludeBranchModal
         isOpen={modalType === "exclude"}
-        id={selectedBranch?.servicoId || ""}
+        id={selectedBranch?.filialId || ""}
         onClose={closeModal}
       />
     </>
