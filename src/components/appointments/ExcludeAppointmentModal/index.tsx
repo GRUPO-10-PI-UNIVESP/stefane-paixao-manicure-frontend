@@ -42,6 +42,7 @@ export const ExcludeAppointmentModal = ({
             onClick={() => onClose()}
           />
           <Button
+            isLoading={removeAppointmentMutation.isLoading}
             size="xs"
             label="Excluir Atendimento"
             grow

@@ -40,6 +40,9 @@ export const AddOrEditClientModal = ({
     if (selectedClient !== undefined) {
       setValue("nomeCliente", String(selectedClient?.nomeCliente));
       setValue("numeroTelefone", String(selectedClient?.numeroTelefone));
+    } else {
+      setValue("nomeCliente", "");
+      setValue("numeroTelefone", "");
     }
   }, [selectedClient]);
 
@@ -77,6 +80,9 @@ export const AddOrEditClientModal = ({
               onClick={() => onClose()}
             />
             <Button
+              isLoading={
+                registerClientMutation.isLoading || editClientMutation.isLoading
+              }
               size="md"
               label={`${isEdit ? "Atualizar" : "Cadastrar"} Cliente`}
               type="submit"

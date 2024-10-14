@@ -7,10 +7,11 @@ import { PageContainer } from "@/components/_common/PageContainer";
 import { Appointment } from "@/core/services/appointments/types";
 import { useGetAllClients } from "@/core/services/clients/hooks";
 import { useGetAllServices } from "@/core/services/services/hooks";
-import { ActionIcon, Button, Loader, Table, Text } from "@istic-ui/react";
+import { ActionIcon, Button, Icon, Loader, Table, Text } from "@istic-ui/react";
 import React, { useState } from "react";
 import { useGetAllAppointments } from "@/core/services/appointments/hooks";
 import { parse } from "date-fns";
+import { useGetAllBranches } from "@/core/services/branches/hooks";
 
 enum ModalType {
   Edit = "edit",
@@ -21,6 +22,7 @@ const Appointments = () => {
   const services = useGetAllServices();
   const clients = useGetAllClients();
   const appointments = useGetAllAppointments();
+  const branches = useGetAllBranches();
 
   const [modalType, setModalType] = useState<ModalType>();
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment>();
@@ -64,6 +66,7 @@ const Appointments = () => {
         subtitle={"Gerencie todos os seus atendimentos"}
         actionButton={
           <Button
+            isLoading={appointments.isLoading}
             size="sm"
             iconProps={{ iconName: "add", iconPosition: "left" }}
             label="Novo Atendimento"
@@ -82,8 +85,9 @@ const Appointments = () => {
           )}
 
           {!appointments.isLoading &&
-            !appointments.isError &&
-            groupedAppointments &&
+          !appointments.isError &&
+          groupedAppointments &&
+          sortedDates.length > 0 ? (
             sortedDates.map((date) => (
               <div key={date} className="flex flex-col gap-4">
                 <Text size="md" weight="bold" color="text-brand500">
@@ -139,7 +143,33 @@ const Appointments = () => {
                   data={groupedAppointments[date]}
                 />
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="w-full h-[80dvh] flex flex-col items-center justify-center">
+              <Icon name="inbox-2" size={48} color="text-brand500" />
+
+              <Text
+                color="text-neutral800"
+                weight="regular"
+                size="lg"
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                Nenhum atendimento encontrado{" "}
+              </Text>
+              <Text
+                color="text-neutral600"
+                weight="regular"
+                size="sm"
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                Clique no botão acima para adicionar um novo atendimento
+              </Text>
+            </div>
+          )}
         </div>
       </PageContainer>
       <AddOrEditAppointmentModal
@@ -148,7 +178,7 @@ const Appointments = () => {
         onClose={closeModal}
         clients={clients.data || []}
         services={services.data || []}
-        branches={[]}
+        branches={branches.data?.filiais || []}
       />
       <ExcludeAppointmentModal
         isOpen={modalType === ModalType.Exclude}

@@ -74,6 +74,7 @@ const Services = () => {
         subtitle={"Gerencie todos os seus serviços"}
         actionButton={
           <Button
+            isLoading={services.isLoading}
             size="sm"
             iconProps={{ iconName: "add", iconPosition: "left" }}
             label="Novo Servico"

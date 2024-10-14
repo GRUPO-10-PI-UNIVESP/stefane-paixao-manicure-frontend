@@ -66,6 +66,7 @@ const Clients = () => {
         subtitle={"Gerencie todos os seus clientes"}
         actionButton={
           <Button
+            isLoading={clients.isLoading}
             size="sm"
             iconProps={{ iconName: "add", iconPosition: "left" }}
             label="Novo Cliente"

@@ -42,6 +42,7 @@ export const ExcludeBranchModal = ({
             onClick={() => onClose()}
           />
           <Button
+            isLoading={removeBranchMutation.isLoading}
             size="xs"
             label="Excluir Filial"
             grow

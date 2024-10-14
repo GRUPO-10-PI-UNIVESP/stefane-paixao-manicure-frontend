@@ -42,6 +42,7 @@ export const ExcludeClientModal = ({
             onClick={() => onClose()}
           />
           <Button
+            isLoading={removeClientMutation.isLoading}
             size="xs"
             label="Excluir Usuário"
             grow

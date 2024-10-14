@@ -44,6 +44,7 @@ export default function Login() {
       </div>
 
       <Button
+        isLoading={validateLogin.isLoading}
         size="xs"
         grow
         label={"entrar"}

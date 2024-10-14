@@ -1,7 +1,7 @@
 import axiosInstance from "@/core/configs/axios";
-import { Branch, CreateBranch, UpdateBranch } from "./types";
+import { Branch, CreateBranch, ListBranches, UpdateBranch } from "./types";
 
-const URL_CONTROLLER = `/servico`;
+const URL_CONTROLLER = `/filial`;
 
 const routes = {
   async createBranch(params: CreateBranch) {
@@ -34,7 +34,7 @@ const routes = {
   },
 
   async getAllBranches() {
-    const result = await axiosInstance.get<Branch[]>(`${URL_CONTROLLER}s`);
+    const result = await axiosInstance.get<ListBranches>(`filiais`);
     return result?.data;
   },
 };

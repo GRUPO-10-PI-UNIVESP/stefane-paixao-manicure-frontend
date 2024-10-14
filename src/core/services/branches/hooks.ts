@@ -1,8 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import servicoBranch from "./services";
-import { CreateBranch, Branch, UpdateBranch } from "./types";
-
-const QUERY_KEY = "login";
+import { CreateBranch, Branch, UpdateBranch, ListBranches } from "./types";
 
 export function useCreateBranch() {
   return useMutation<Branch, Error, CreateBranch>(servicoBranch.createBranch, {
@@ -16,8 +14,8 @@ export function useCreateBranch() {
 }
 
 export function useUpdateBranch() {
-  return useMutation<Branch, Error, { servicoId: string; data: UpdateBranch }>(
-    ({ servicoId, data }) => servicoBranch.updateBranch(servicoId, data),
+  return useMutation<Branch, Error, { filialId: string; data: UpdateBranch }>(
+    ({ filialId, data }) => servicoBranch.updateBranch(filialId, data),
     {
       onSuccess(data) {
         console.log(data, "Success");
@@ -56,7 +54,7 @@ export function useGetBranch(servicoId: string) {
 }
 
 export function useGetAllBranches() {
-  return useQuery<Branch[], Error>(
+  return useQuery<ListBranches, Error>(
     `getAllBranches`,
     servicoBranch.getAllBranches,
     {

@@ -32,16 +32,16 @@ const Branches = () => {
 
   const columns: TableColumn<Branch>[] = [
     {
-      index: "nomeServico",
+      index: "nome",
       label: "Nome",
     },
     {
       index: "address",
       label: "Endereço",
-      render: ({ address }) =>
-        address ? (
+      render: ({ endereco }) =>
+        endereco ? (
           <p>
-            {`${address.street}, ${address.number} - ${address.neighborhood}`}
+            {`${endereco.logradouro}, ${endereco.numero} - ${endereco.bairro}`}
           </p>
         ) : (
           <p>Endereço não informado</p>
@@ -80,6 +80,7 @@ const Branches = () => {
         subtitle={"Gerencie todas as suas filiais"}
         actionButton={
           <Button
+            isLoading={branches.isLoading}
             size="sm"
             iconProps={{ iconName: "add", iconPosition: "left" }}
             label="Nova Filial"
@@ -97,7 +98,7 @@ const Branches = () => {
           <Table<Branch>
             minHeight="calc(100vh - 125px)"
             columns={columns}
-            data={branches.data || []}
+            data={branches.data?.filiais || []}
             emptyValues={{
               title: "Ainda não há filiais cadastrados",
               subTitle: "Clique em 'Nova Filial' para criar uma nova.",

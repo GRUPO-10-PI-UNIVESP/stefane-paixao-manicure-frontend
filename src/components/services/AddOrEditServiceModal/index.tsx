@@ -40,6 +40,9 @@ export const AddOrEditServiceModal = ({
     if (selectedService !== undefined) {
       setValue("nomeServico", String(selectedService?.nomeServico));
       setValue("valorServico", selectedService?.valorServico);
+    } else {
+      setValue("nomeServico", "");
+      setValue("valorServico", undefined);
     }
   }, [selectedService]);
 
@@ -77,6 +80,10 @@ export const AddOrEditServiceModal = ({
               onClick={() => onClose()}
             />
             <Button
+              isLoading={
+                registerServiceMutation.isLoading ||
+                editServiceMutation.isLoading
+              }
               size="md"
               label={`${isEdit ? "Atualizar" : "Cadastrar"} Serviço`}
               type="submit"

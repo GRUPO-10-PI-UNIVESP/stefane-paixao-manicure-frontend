@@ -64,7 +64,14 @@ export const AddOrEditAppointmentModal = ({
         selectedAppointment?.atendimentoHasServico[0].servicoId
       );
       setValue("dataHoraInicial", selectedAppointment?.agenda.dataHoraInicial);
+      setValue("dataHoraFinal", selectedAppointment?.agenda.dataHoraFinal);
     } else {
+      setValue("clienteId", undefined);
+      setValue("agendaId", undefined);
+      setValue("filialId", undefined);
+      setValue("servicoId", undefined);
+      setValue("dataHoraInicial", undefined);
+      setValue("dataHoraFinal", undefined);
       reset();
     }
   }, [selectedAppointment]);
@@ -88,7 +95,7 @@ export const AddOrEditAppointmentModal = ({
               pickerHeight="40dvh"
               {...register("filialId")}
               options={branches.map((branch) => ({
-                label: branch.nomeFilial,
+                label: branch.nome,
                 value: branch.filialId,
               }))}
               onSelect={(option?: { label: string; value: string }) => {
@@ -150,6 +157,10 @@ export const AddOrEditAppointmentModal = ({
               onClick={() => onClose()}
             />
             <Button
+              isLoading={
+                registerAppointmentMutation.isLoading ||
+                editAppointmentMutation.isLoading
+              }
               size="md"
               label={`${isEdit ? "Atualizar" : "Cadastrar"} Atendimento`}
               type="submit"

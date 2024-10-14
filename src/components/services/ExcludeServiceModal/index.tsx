@@ -42,6 +42,7 @@ export const ExcludeServiceModal = ({
             onClick={() => onClose()}
           />
           <Button
+            isLoading={removeServiceMutation.isLoading}
             size="xs"
             label="Excluir Serviço"
             grow
