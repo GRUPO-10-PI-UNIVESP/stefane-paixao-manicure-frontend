@@ -1,8 +1,11 @@
 "use client";
-import { AddOrEditClientModal, ExcludeClientModal } from "@/components/clients";
+import {
+  AddOrEditBranchModal,
+  ExcludeBranchModal,
+} from "@/components/branches";
 import { PageContainer } from "@/components/_common/PageContainer";
-import { useGetAllClients } from "@/core/services/clients/hooks";
-import { Client } from "@/core/services/clients/types";
+import { useGetAllBranches } from "@/core/services/branches/hooks";
+import { Branch } from "@/core/services/branches/types";
 import {
   ActionIcon,
   Button,
@@ -13,26 +16,37 @@ import {
 } from "@istic-ui/react";
 import React, { useState } from "react";
 
-const Clients = () => {
-  const clients = useGetAllClients();
+const Branches = () => {
+  const branches = useGetAllBranches();
   const [modalType, setModalType] = useState<string>();
-  const [selectedClient, setSelectedClient] = useState<Client>();
-  const openModal = (type: string, client?: Client) => {
+  const [selectedBranch, setSelectedBranch] = useState<Branch>();
+  const openModal = (type: string, branch?: Branch) => {
     setModalType(type);
-    setSelectedClient(client);
+    setSelectedBranch(branch);
   };
   const closeModal = () => {
     setModalType(undefined);
-    setSelectedClient(undefined);
-    clients.refetch();
+    setSelectedBranch(undefined);
+    branches.refetch();
   };
 
-  const columns: TableColumn<Client>[] = [
+  const columns: TableColumn<Branch>[] = [
     {
-      index: "nomeCliente",
+      index: "nome",
       label: "Nome",
     },
-    { index: "numeroTelefone", label: "Telefone" },
+    {
+      index: "address",
+      label: "Endereço",
+      render: ({ endereco }) =>
+        endereco ? (
+          <p>
+            {`${endereco.logradouro}, ${endereco.numero} - ${endereco.bairro}`}
+          </p>
+        ) : (
+          <p>Endereço não informado</p>
+        ),
+    },
     {
       index: "actions",
       label: "",
@@ -62,49 +76,49 @@ const Clients = () => {
   return (
     <>
       <PageContainer
-        title={"Clientes"}
-        subtitle={"Gerencie todos os seus clientes"}
+        title={"Filiais"}
+        subtitle={"Gerencie todas as suas filiais"}
         actionButton={
           <Button
-            isLoading={clients.isLoading}
+            isLoading={branches.isLoading}
             size="sm"
             iconProps={{ iconName: "add", iconPosition: "left" }}
-            label="Novo Cliente"
+            label="Nova Filial"
             onClick={() => setModalType("edit")}
           />
         }
       >
-        {clients.isLoading && (
+        {branches.isLoading && (
           <div className="w-full h-[80dvh] flex items-center justify-center">
             <Loader width="bold" size="xl" color="border-brand500" />
           </div>
         )}
-        {clients.isError && <p>Ocorreu um erro ao carregar os clientes</p>}
-        {!clients.isLoading && !clients.isError && (
-          <Table<Client>
+        {branches.isError && <p>Ocorreu um erro ao carregar as filiais</p>}
+        {!branches.isLoading && !branches.isError && (
+          <Table<Branch>
             minHeight="calc(100vh - 125px)"
             columns={columns}
-            data={clients.data || []}
+            data={branches.data?.filiais || []}
             emptyValues={{
-              title: "Ainda não há clientes cadastrados",
-              subTitle: "Clique em 'Novo Cliente' para criar um novo.",
+              title: "Ainda não há filiais cadastrados",
+              subTitle: "Clique em 'Nova Filial' para criar uma nova.",
             }}
           />
         )}
       </PageContainer>
 
-      <AddOrEditClientModal
-        selectedClient={selectedClient}
+      <AddOrEditBranchModal
+        selectedBranch={selectedBranch}
         isOpen={modalType === "edit"}
         onClose={closeModal}
       />
-      <ExcludeClientModal
+      <ExcludeBranchModal
         isOpen={modalType === "exclude"}
-        id={selectedClient?.clienteId || ""}
+        id={selectedBranch?.filialId || ""}
         onClose={closeModal}
       />
     </>
   );
 };
 
-export default Clients;
+export default Branches;

@@ -1,4 +1,4 @@
-import { Heading, Text } from "@stick-ui/lib";
+import { Heading, Text } from "@istic-ui/react";
 import { ReactNode } from "react";
 
 export const PageContainer = ({

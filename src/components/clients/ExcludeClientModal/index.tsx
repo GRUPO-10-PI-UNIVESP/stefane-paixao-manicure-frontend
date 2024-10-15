@@ -1,6 +1,6 @@
 "use client";
 import { useDeleteClient } from "@/core/services/clients/hooks";
-import { Button, Modal, Text } from "@stick-ui/lib";
+import { Button, Modal, Text } from "@istic-ui/react";
 
 interface ExcludeClientModalProps {
   isOpen: boolean;
@@ -42,6 +42,7 @@ export const ExcludeClientModal = ({
             onClick={() => onClose()}
           />
           <Button
+            isLoading={removeClientMutation.isLoading}
             size="xs"
             label="Excluir Usuário"
             grow

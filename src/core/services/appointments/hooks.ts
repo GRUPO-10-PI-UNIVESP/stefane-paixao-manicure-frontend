@@ -37,7 +37,6 @@ export function useUpdateAppointment() {
       appointmentAppointment.updateAppointment(atendimentoId, data),
     {
       onSuccess(data) {
-        console.log("UpdateAppointment onSuccess", data);
         queryClient.invalidateQueries(QUERY_KEY, { exact: true });
         queryClient.refetchQueries(QUERY_KEY, { exact: true });
       },
@@ -53,7 +52,6 @@ export function useDeleteAppointment() {
 
   return useMutation(appointmentAppointment.deleteAppointment, {
     onSuccess(data) {
-      console.log("DeleteAppointment onSuccess", data);
       queryClient.invalidateQueries(QUERY_KEY, { exact: true });
       queryClient.refetchQueries(QUERY_KEY, { exact: true });
     },

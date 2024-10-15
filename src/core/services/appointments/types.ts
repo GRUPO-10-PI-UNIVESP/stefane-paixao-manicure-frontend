@@ -1,6 +1,7 @@
 export interface Appointment {
   atendimentoId: number;
   clienteId: number;
+  filialId: number;
   agendaId: number;
   valorTotal: string;
   cliente: {
@@ -31,11 +32,12 @@ export interface Appointment {
 }
 
 export type CreateAppointment = {
-  clienteId: number;
-  servicoId: number;
+  filialId?: number;
+  clienteId?: number;
+  servicoId?: number;
   agendaId?: number;
-  dataHoraInicial: string;
-  dataHoraFinal: string;
+  dataHoraInicial?: string;
+  dataHoraFinal?: string;
 };
 
 export type UpdateAppointment = Partial<CreateAppointment>;

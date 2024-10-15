@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@stick-ui/lib": "^1.15.2",
+    "@istic-ui/react": "^1.23.9",
     "axios": "^1.7.0",
     "date-fns": "^3.6.0",
     "next": "14.2.2",
