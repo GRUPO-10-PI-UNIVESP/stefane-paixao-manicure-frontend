@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useValidateLogin } from "@/core/services/login/hooks";
 import { ILogin } from "@/core/services/login/types";
-import { TextInput, PasswordInput, Button, Heading } from "@stick-ui/lib";
+import { TextInput, PasswordInput, Button, Heading } from "@istic-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 export default function Login() {
   const router = useRouter();
@@ -44,6 +44,7 @@ export default function Login() {
       </div>
 
       <Button
+        isLoading={validateLogin.isLoading}
         size="xs"
         grow
         label={"entrar"}

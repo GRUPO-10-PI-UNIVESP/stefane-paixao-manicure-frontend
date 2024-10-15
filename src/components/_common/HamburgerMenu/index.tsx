@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionIcon, Button, Icon } from "@stick-ui/lib";
+import { ActionIcon, Button, Icon } from "@istic-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -48,7 +48,7 @@ export const HamburgerMenu = () => {
         />
       </div>
       {isOpened && (
-        <div className="absolute top-full left-0 w-full flex flex-col gap-y-4 bg-white z-10">
+        <div className="absolute top-full left-0 w-full flex flex-col gap-t-4 bg-white z-30">
           {sideBarItems.map((item, index) => (
             <div className="w-full" key={index}>
               {item.subItems.map((subItem, subIndex) => (
@@ -71,6 +71,16 @@ export const HamburgerMenu = () => {
               ))}
             </div>
           ))}
+          <ActionIcon
+            size="xs"
+            variant="light"
+            iconName="logout"
+            onClick={() => {
+              document.cookie =
+                "isLoggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+              router.push("/");
+            }}
+          />
         </div>
       )}
     </div>

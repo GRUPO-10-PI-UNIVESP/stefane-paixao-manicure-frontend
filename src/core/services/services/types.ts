@@ -1,7 +1,7 @@
 export type Service = {
   servicoId: string;
   nomeServico: string;
-  valorServico: number;
+  valorServico?: number;
 };
 
 export type CreateService = Omit<Service, "servicoId">;

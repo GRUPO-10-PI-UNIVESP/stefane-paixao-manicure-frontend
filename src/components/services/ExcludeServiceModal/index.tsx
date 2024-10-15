@@ -1,6 +1,6 @@
 "use service";
 import { useDeleteService } from "@/core/services/services/hooks";
-import { Button, Modal, Text } from "@stick-ui/lib";
+import { Button, Modal, Text } from "@istic-ui/react";
 
 interface ExcludeServiceModalProps {
   isOpen: boolean;
@@ -42,6 +42,7 @@ export const ExcludeServiceModal = ({
             onClick={() => onClose()}
           />
           <Button
+            isLoading={removeServiceMutation.isLoading}
             size="xs"
             label="Excluir Serviço"
             grow

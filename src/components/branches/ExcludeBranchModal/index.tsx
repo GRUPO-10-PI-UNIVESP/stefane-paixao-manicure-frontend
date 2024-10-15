@@ -1,36 +1,36 @@
-"use appointment";
-import { useDeleteAppointment } from "@/core/services/appointments/hooks";
+"use branch";
+import { useDeleteBranch } from "@/core/services/branches/hooks";
 import { Button, Modal, Text } from "@istic-ui/react";
 
-interface ExcludeAppointmentModalProps {
+interface ExcludeBranchModalProps {
   isOpen: boolean;
-  id: number;
+  id: string;
   onClose: () => void;
 }
-export const ExcludeAppointmentModal = ({
+export const ExcludeBranchModal = ({
   isOpen,
   id,
   onClose,
-}: ExcludeAppointmentModalProps) => {
-  const removeAppointmentMutation = useDeleteAppointment();
+}: ExcludeBranchModalProps) => {
+  const removeBranchMutation = useDeleteBranch();
 
   function handleRemove() {
-    removeAppointmentMutation.mutateAsync(id);
+    removeBranchMutation.mutateAsync(id);
     onClose();
   }
 
   return (
     <Modal
       contentWidth={400}
-      title="Excluir Atendimento"
+      title="Excluir Filial"
       isOpen={isOpen}
       onClose={() => onClose()}
     >
       <div className="flex flex-col w-full gap-6">
         <div>
           <Text size="sm">
-            Você tem certeza que gostaria de excluir esse atendimento? Todos os
-            dados serão perdidos
+            Você tem certeza que gostaria de excluir essa filial? Todos os dados
+            serão perdidos
           </Text>
         </div>
         <div className="w-full gap-2 flex flex-row ">
@@ -42,9 +42,9 @@ export const ExcludeAppointmentModal = ({
             onClick={() => onClose()}
           />
           <Button
-            isLoading={removeAppointmentMutation.isLoading}
+            isLoading={removeBranchMutation.isLoading}
             size="xs"
-            label="Excluir Atendimento"
+            label="Excluir Filial"
             grow
             onClick={() => handleRemove()}
           />

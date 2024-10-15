@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "react-query";
 import servicoService from "./services";
 import { CreateService, Service, UpdateService } from "./types";
 
-const QUERY_KEY = "login";
+const QUERY_KEY = "services";
 
 export function useCreateService() {
   return useMutation<Service, Error, CreateService>(

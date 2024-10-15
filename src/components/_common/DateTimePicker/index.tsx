@@ -59,7 +59,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   };
 
   return (
-    <div className="flex flex-row items-center justify-between space-x-4">
+    <div className="flex gap-4 pb-4">
       <div className="w-full">
         <label
           className="block font-default text-xs font-regular"
@@ -74,7 +74,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           onChange={handleDateChange}
           placeholder={datePlaceholder}
           required={required}
-          className={`mt-2 px-4 py-2 border ${
+          className={`w-full mt-2 px-4 py-2 border ${
             dateError ? "border-red-500" : "border-gray-300"
           } rounded-md shadow-sm focus:outline-none focus:ring-2 ${
             dateError ? "focus:ring-red-500" : "focus:ring-brand500"
