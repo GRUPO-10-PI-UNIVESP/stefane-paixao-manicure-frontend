@@ -8,7 +8,7 @@ export default function RootLayout({
 }>) {
   return (
     <main className="flex h-screen">
-      <div className="hidden md:flex basis-1/2 bg-brand300 justify-center items-center">
+      <div className="hidden md:flex basis-1/2 bg-brand-300 justify-center items-center">
         <Image
           src={"/logo.png"}
           width={400}

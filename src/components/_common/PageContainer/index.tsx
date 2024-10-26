@@ -16,7 +16,7 @@ export const PageContainer = ({
     <div>
       <header className="flex justify-between items-center mb-4">
         <div>
-          <Heading level="h3" weight="bold" color="text-brand500">
+          <Heading level="h3" weight="bold" color="text-brand-500">
             {title}
           </Heading>
           <Text>{subtitle}</Text>

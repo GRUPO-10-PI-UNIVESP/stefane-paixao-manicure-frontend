@@ -32,7 +32,7 @@ export const HamburgerMenu = () => {
 
   return (
     <div className="w-full md:px-4:py-6 flex flex-col items-center justify-between text-center relative">
-      <div className="bg-brand0 w-full px-4 py-6 h-[80px] flex items-center justify-between text-center relative">
+      <div className="bg-brand-50 w-full px-4 py-6 h-[80px] flex items-center justify-between text-center relative">
         <Image
           src="/logo.png"
           className="w-[90px] h-[74px]"

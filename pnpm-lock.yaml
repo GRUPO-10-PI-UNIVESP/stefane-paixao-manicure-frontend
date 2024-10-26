@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@istic-ui/react':
-    specifier: ^1.23.9
-    version: 1.23.9(react@18.2.0)
+    specifier: ^2.0.3
+    version: 2.0.3(react@18.2.0)
   axios:
     specifier: ^1.7.0
     version: 1.7.0
@@ -29,6 +29,9 @@ dependencies:
   react-query:
     specifier: ^3.39.3
     version: 3.39.3(react-dom@18.2.0)(react@18.2.0)
+  uuid:
+    specifier: ^10.0.0
+    version: 10.0.0
 
 devDependencies:
   '@types/node':
@@ -143,8 +146,8 @@ packages:
       wrap-ansi-cjs: /wrap-ansi@7.0.0
     dev: true
 
-  /@istic-ui/react@1.23.9(react@18.2.0):
-    resolution: {integrity: sha512-1frtINVPbPGDZODuWkYjl4DevA20v0r3esV/RYPNPFodQeZOmRXRHg3IqtKUG4u5v5DfCPQZRkD5B9picW0MHw==}
+  /@istic-ui/react@2.0.3(react@18.2.0):
+    resolution: {integrity: sha512-CScblyyamyG5AyZSMb2DYaZ7Nb9bYDefrq72Xvz3QuJ3VrYiAvyLQuJc59REP4IizUeCpgZb2eZ3kS7ZqOiUTg==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -2921,6 +2924,11 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+    dev: false
 
   /which-boxed-primitive@1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

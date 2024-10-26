@@ -1,13 +1,25 @@
 import type { Config } from "tailwindcss";
-
+import { applyButtonClasses, applyPrimaryColorAndShade } from "@istic-ui/react";
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@istic-ui/react/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    {
+      pattern:
+        /^(bg|text|border)-brand-(0|100|200|300|400|500|600|700|800|900|950)$/,
+    },
+    {
+      pattern: /btn-(filled|outline|subtle|light)$/,
+    },
+    {
+      pattern: /rounded-(input|button|search-input)-(xs|sm|md|lg|xl)$/,
+    },
+  ],
   theme: {
+    primaryShade: 600,
+    primaryColor: "brand",
     extend: {
       colors: {
         white: "#ffffff",
@@ -15,41 +27,52 @@ const config: Config = {
         warning: "#fcb019",
         info: "#00adf2",
         error: "#fc3932",
-        brand900: "#291226",
-        brand800: "#53254d",
-        brand700: "#7c3775",
-        brand600: "#a64a9c",
-        brand500: "#d05dc3",
-        brand400: "#d97dcf",
-        brand300: "#F2B2EC",
-        brand200: "#ecbee7",
-        brand100: "#f5def3",
-        brand0: "#f3e0f1",
-        neutral900: "#212529",
-        neutral800: "#343a40",
-        neutral700: "#495057",
-        neutral600: "#868e96",
-        neutral500: "#adb5bd",
-        neutral400: "#ced4da",
-        neutral300: "#dee2e6",
-        neutral200: "#e9ecef",
-        neutral100: "#f1f3f5",
-        neutral0: "#f8f9fa",
+
+        brand: {
+          950: "#31153d",
+          900: "#291226",
+          800: "#53254d",
+          700: "#7c3775",
+          600: "#a64a9c",
+          500: "#d05dc3",
+          400: "#d97dcf",
+          300: "#F2B2EC",
+          200: "#ecbee7",
+          100: "#f5def3",
+          50: "#f3e0f1",
+        },
+        neutral: {
+          950: "#212529",
+          900: "#212529",
+          800: "#343a40",
+          700: "#495057",
+          600: "#868e96",
+          500: "#adb5bd",
+          400: "#ced4da",
+          300: "#dee2e6",
+          200: "#e9ecef",
+          100: "#f1f3f5",
+          50: "#f8f9fa",
+        },
       },
+
       fontFamily: {
         default: ["Mulish", "sans-serif"],
       },
+
       fontSize: {
         xs: "0.75rem",
         sm: "0.875rem",
         md: "1rem",
         lg: "1.125rem",
         xl: "1.25rem",
+
         "button-xs": "0.75rem",
         "button-sm": "0.875rem",
         "button-md": "1rem",
         "button-lg": "1.125rem",
         "button-xl": "1.25rem",
+
         "title-h1": "3rem",
         "title-h2": "2.5rem",
         "title-h3": "2rem",
@@ -65,61 +88,74 @@ const config: Config = {
         text: "150%",
         title: "150%",
       },
+      borderRadius: {
+        "input-xs": "5px",
+        "input-lg": "5px",
+
+        "search-input-xs": "5px",
+        "search-input-lg": "5px",
+
+        "button-xs": "5px",
+        "button-sm": "5px",
+        "button-md": "5px",
+        "button-lg": "5px",
+        "button-xl": "5px",
+      },
       keyframes: {
         "fade-in": {
           "0%": {
-            opacity: 0,
+            opacity: "0",
           },
           "100%": {
-            opacity: 0.4,
+            opacity: "0.4",
           },
         },
         "fade-in-left": {
           "0%": {
-            opacity: 0,
+            opacity: "0",
             transform: "translate3d(-100%, 0, 0)",
           },
           "100%": {
-            opacity: 1,
+            opacity: "1",
             transform: "translate3d(0, 0, 0)",
           },
         },
         "fade-in-right": {
           "0%": {
-            opacity: 0,
+            opacity: "0",
             transform: "translate3d(100%, 0, 0)",
           },
           "100%": {
-            opacity: 1,
+            opacity: "1",
             transform: "translate3d(0, 0, 0)",
           },
         },
         "fade-in-up": {
-          "0%": { opacity: 0, transform: "translate3d(-50%, 100%, 0)" },
-          "100%": { opacity: 1, transform: "translate3d(-50%, -50%, 0)" },
+          "0%": { opacity: "0", transform: "translate3d(-50%, 100%, 0)" },
+          "100%": { opacity: "1", transform: "translate3d(-50%, -50%, 0)" },
         },
         "fade-out-up": {
-          "0%": { opacity: 1 },
-          "100%": { opacity: 0, transform: "translate3d(0, -100%, 0)" },
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0", transform: "translate3d(0, -100%, 0)" },
         },
         "fade-in-down": {
-          "0%": { opacity: 0, transform: "translate3d(0, -100%, 0)" },
-          "100%": { opacity: 1, transform: "translate3d(0, 0, 0)" },
+          "0%": { opacity: "0", transform: "translate3d(0, -100%, 0)" },
+          "100%": { opacity: "1", transform: "translate3d(0, 0, 0)" },
         },
         "chip-fade-in": {
-          "0%": { opacity: 0 },
-          "100%": { opacity: 1 },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
         "chip-scale-right": {
           "0%": {
             transform: "scaleX(0.6)",
             transformOrigin: "0% 0%",
-            opacity: 1,
+            opacity: "1",
           },
           "100%": {
             transform: "scaleX(1)",
             transformOrigin: "0% 0%",
-            opacity: 1,
+            opacity: "1",
           },
         },
         "progress-bar": {
@@ -141,6 +177,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [applyButtonClasses, applyPrimaryColorAndShade],
 };
 export default config;

@@ -65,7 +65,7 @@ export const Sidebar = () => {
               router.push("/");
             }}
           />
-          <Text color="text-brand600" size="xs">
+          <Text color="text-brand-600" size="xs">
             © {new Date().getFullYear()} Stefane Paixão Nail Designer
           </Text>
         </div>

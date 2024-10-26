@@ -77,7 +77,7 @@ const Appointments = () => {
         <div className="bg-white flex flex-col gap-4 ">
           {appointments.isLoading && (
             <div className="w-full h-[80dvh] flex items-center justify-center">
-              <Loader width="bold" size="xl" color="border-brand500" />
+              <Loader width="bold" size="xl" color="border-brand-500" />
             </div>
           )}
           {appointments.isError && (
@@ -90,7 +90,7 @@ const Appointments = () => {
           sortedDates.length > 0 ? (
             sortedDates.map((date) => (
               <div key={date} className="flex flex-col gap-4">
-                <Text size="md" weight="bold" color="text-brand500">
+                <Text size="md" weight="bold" color="text-brand-500">
                   {date}
                 </Text>
 
@@ -146,7 +146,7 @@ const Appointments = () => {
             ))
           ) : (
             <div className="w-full h-[80dvh] flex flex-col items-center justify-center">
-              <Icon name="inbox-2" size={48} color="text-brand500" />
+              <Icon name="inbox-2" size={48} color="text-brand-500" />
 
               <Text
                 color="text-neutral800"
@@ -156,7 +156,7 @@ const Appointments = () => {
                   textAlign: "center",
                 }}
               >
-                Nenhum atendimento encontrado{" "}
+                Nenhum atendimento encontrado
               </Text>
               <Text
                 color="text-neutral600"
