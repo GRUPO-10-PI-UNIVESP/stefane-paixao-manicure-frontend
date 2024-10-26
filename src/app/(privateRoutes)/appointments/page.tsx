@@ -149,7 +149,7 @@ const Appointments = () => {
               <Icon name="inbox-2" size={48} color="text-brand-500" />
 
               <Text
-                color="text-neutral800"
+                color="text-neutral-800"
                 weight="regular"
                 size="lg"
                 style={{
@@ -159,7 +159,7 @@ const Appointments = () => {
                 Nenhum atendimento encontrado
               </Text>
               <Text
-                color="text-neutral600"
+                color="text-neutral-600"
                 weight="regular"
                 size="sm"
                 style={{

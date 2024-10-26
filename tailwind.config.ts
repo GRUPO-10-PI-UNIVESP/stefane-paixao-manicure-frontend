@@ -8,7 +8,7 @@ const config: Config = {
   safelist: [
     {
       pattern:
-        /^(bg|text|border)-brand-(0|100|200|300|400|500|600|700|800|900|950)$/,
+        /^(bg|text|border)-(brand|neutral)-(0|100|200|300|400|500|600|700|800|900|950)$/,
     },
     {
       pattern: /btn-(filled|outline|subtle|light)$/,

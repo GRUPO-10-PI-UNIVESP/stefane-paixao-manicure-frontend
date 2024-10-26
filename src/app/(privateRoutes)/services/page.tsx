@@ -39,7 +39,9 @@ const Services = () => {
       index: "valorServico",
       label: "Valor",
       render: ({ valorServico }) =>
-        `R$ ${Number(valorServico)?.toFixed(2) || 0}`,
+        `R$ ${
+          Number(valorServico)?.toFixed(2)?.toString()?.replace(".", ",") || 0
+        }`,
     },
     {
       index: "actions",

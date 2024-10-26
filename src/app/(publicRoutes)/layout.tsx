@@ -18,7 +18,7 @@ export default function RootLayout({
           }
         />
       </div>
-      <div className="w-full flex-col md:basis-1/2 flex md:justify-center items-center bg-neutral0">
+      <div className="w-full flex-col md:basis-1/2 flex md:justify-center items-center bg-neutral-50">
         <div className="md:hidden block">
           <Image
             src={"/logo.png"}
@@ -29,7 +29,7 @@ export default function RootLayout({
             }
           />
         </div>
-        <div className="border-2 border-neutral400 p-8 rounded max-w-[380px] w-full m-8">
+        <div className="border-2 border-neutral-400 p-8 rounded max-w-[380px] w-full m-8">
           {children}
         </div>
       </div>

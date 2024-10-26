@@ -49,8 +49,23 @@ export const AddOrEditBranchModal = ({
         ...data,
       });
     }
-    onClose();
+    handleOnClose();
   }
+  const handleOnClose = () => {
+    onClose();
+    setValue("nome", "");
+    setValue("filialId", "");
+
+    setValue("endereco.cep", "");
+    setValue("endereco.logradouro", "");
+    setValue("endereco.numero", "");
+    setValue("endereco.bairro", "");
+    setValue("endereco.cidade", "");
+    setValue("endereco.estado", "");
+    setValue("endereco.complemento", "");
+
+    reset();
+  };
 
   const handleViaCep = async (cep: string) => {
     if (cep.length !== 8) return;
@@ -68,6 +83,7 @@ export const AddOrEditBranchModal = ({
   useEffect(() => {
     if (selectedBranch !== undefined) {
       setValue("nome", String(selectedBranch?.nome));
+      setValue("filialId", String(selectedBranch?.filialId));
       setValue("endereco.cep", String(selectedBranch?.endereco.cep));
       setValue(
         "endereco.logradouro",
@@ -83,6 +99,7 @@ export const AddOrEditBranchModal = ({
       );
     } else {
       setValue("nome", "");
+      setValue("filialId", "");
 
       setValue("endereco.cep", "");
       setValue("endereco.logradouro", "");
@@ -94,14 +111,14 @@ export const AddOrEditBranchModal = ({
 
       reset();
     }
-  }, [selectedBranch]);
+  }, [selectedBranch, reset, setValue]);
 
   return (
     <Modal
       contentWidth={400}
       title={`${isEdit ? "Editar" : "Cadastrar"} Filial`}
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={() => handleOnClose()}
     >
       <div className="flex flex-col w-full gap-6">
         <form onSubmit={handleSubmit((data) => handleRegisterBranch(data))}>
@@ -109,7 +126,7 @@ export const AddOrEditBranchModal = ({
             <TextInput
               size="lg"
               label="Nome"
-              placeholder="Adicione o nome do filial"
+              placeholder="Adicione o nome da filial"
               {...register("nome")}
               required
             />
@@ -179,12 +196,12 @@ export const AddOrEditBranchModal = ({
               />
             </div>
           </div>
-          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral100">
+          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral-100">
             <Button
               size="md"
               variant="outline"
               label="Cancelar"
-              onClick={() => onClose()}
+              onClick={() => handleOnClose()}
             />
             <Button
               isLoading={

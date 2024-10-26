@@ -42,17 +42,30 @@ export const AddOrEditAppointmentModal = ({
   const servicoId = watch("servicoId");
 
   async function handleRegisterAppointment(data: CreateAppointment) {
+    const convertedData: CreateAppointment = {
+      ...data,
+    };
     if (selectedAppointment !== undefined) {
       await editAppointmentMutation.mutateAsync({
         atendimentoId: selectedAppointment.atendimentoId,
-        data: data,
+        data: convertedData,
       });
     } else {
-      await registerAppointmentMutation.mutateAsync(data);
+      await registerAppointmentMutation.mutateAsync(convertedData);
     }
-    onClose();
+    handleOnClose();
     reset();
   }
+  const handleOnClose = () => {
+    onClose();
+    setValue("clienteId", undefined);
+    setValue("agendaId", undefined);
+    setValue("filialId", undefined);
+    setValue("servicoId", undefined);
+    setValue("dataHoraInicial", undefined);
+    setValue("dataHoraFinal", undefined);
+    reset();
+  };
 
   useEffect(() => {
     if (selectedAppointment !== undefined) {
@@ -61,10 +74,10 @@ export const AddOrEditAppointmentModal = ({
       setValue("filialId", Number(selectedAppointment?.filialId));
       setValue(
         "servicoId",
-        selectedAppointment?.atendimentoHasServico[0].servicoId
+        selectedAppointment?.atendimentoHasServico[0]?.servicoId
       );
-      setValue("dataHoraInicial", selectedAppointment?.agenda.dataHoraInicial);
-      setValue("dataHoraFinal", selectedAppointment?.agenda.dataHoraFinal);
+      setValue("dataHoraInicial", selectedAppointment?.agenda?.dataHoraInicial);
+      setValue("dataHoraFinal", selectedAppointment?.agenda?.dataHoraFinal);
     } else {
       setValue("clienteId", undefined);
       setValue("agendaId", undefined);
@@ -74,14 +87,14 @@ export const AddOrEditAppointmentModal = ({
       setValue("dataHoraFinal", undefined);
       reset();
     }
-  }, [selectedAppointment]);
+  }, [selectedAppointment, setValue, reset]);
 
   return (
     <Modal
       contentWidth={400}
       title={`${isEdit ? "Editar" : "Cadastrar"} Atendimento`}
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={() => handleOnClose()}
     >
       <div className="flex flex-col w-full gap-6">
         <form
@@ -149,12 +162,12 @@ export const AddOrEditAppointmentModal = ({
             />
           </div>
 
-          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral100">
+          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral-100">
             <Button
               size="md"
               variant="outline"
               label="Cancelar"
-              onClick={() => onClose()}
+              onClick={() => handleOnClose()}
             />
             <Button
               isLoading={
