@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +15,7 @@ jobs:
       - name: Build image
         run: |
           docker build -t frontend_image .
+
       - name: Save image
         run: |
           docker save frontend_image -o frontend.tar
@@ -34,10 +35,14 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          key: $ {{ secrets.SERVER_SSH_KEY }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SERVERR_PASSPHRASE }}
           source: .
           target: ~/
+
+      - name: List files after transfer
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "ls -al ~"
 
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
@@ -51,6 +56,7 @@ jobs:
             docker stop frontend-container || true
             docker rm frontend-container || true
             docker rmi frontend_image || true
-            docker load -i frontend.tar.gz 
-            docker run --name frontend-container -d -p 80:80 frontend_image
-            cd ~
+            docker load -i frontend.tar.gz
+            docker ps -a  # Verifica se o contêiner foi criado
+            docker run --name frontend-container -d -p 80:3000 frontend_image  # Assumindo que o Next.js está na porta 3000
+            docker logs frontend-container  # Verifica os logs do contêiner
