@@ -54,7 +54,14 @@ const Clients = () => {
               onClick: () => openModal("exclude", data),
             },
           ]}
-          mainItem={<ActionIcon variant="subtle" iconName="more-2" />}
+          mainItem={
+            <ActionIcon
+              name={`more-details-${data.nomeCliente}`}
+              aria-label="Mais detalhes"
+              variant="subtle"
+              iconName="more-2"
+            />
+          }
         />
       ),
     },

@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@istic-ui/react':
-    specifier: ^2.0.3
-    version: 2.0.3(react@18.2.0)
+    specifier: ^2.0.10
+    version: 2.0.10(react@18.2.0)
   axios:
     specifier: ^1.7.0
     version: 1.7.0
@@ -146,10 +146,10 @@ packages:
       wrap-ansi-cjs: /wrap-ansi@7.0.0
     dev: true
 
-  /@istic-ui/react@2.0.3(react@18.2.0):
-    resolution: {integrity: sha512-CScblyyamyG5AyZSMb2DYaZ7Nb9bYDefrq72Xvz3QuJ3VrYiAvyLQuJc59REP4IizUeCpgZb2eZ3kS7ZqOiUTg==}
+  /@istic-ui/react@2.0.10(react@18.2.0):
+    resolution: {integrity: sha512-3oQ7bUkK+5fKv/PvJ6Yd+OH6N8Ee4cpcRiFHTlUn5kWg7OKORxuYRj456pJwDiyvUEhMrZPbq85A/qHsrm3IDw==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.0.0
     dependencies:
       caniuse-lite: 1.0.30001610
       clsx: 2.1.0

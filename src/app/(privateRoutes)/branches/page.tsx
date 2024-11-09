@@ -68,7 +68,14 @@ const Branches = () => {
               onClick: () => openModal("exclude", data),
             },
           ]}
-          mainItem={<ActionIcon variant="subtle" iconName="more-2" />}
+          mainItem={
+            <ActionIcon
+              name={`more-details-${data.nome}`}
+              aria-label="Mais detalhes"
+              variant="subtle"
+              iconName="more-2"
+            />
+          }
         />
       ),
     },
