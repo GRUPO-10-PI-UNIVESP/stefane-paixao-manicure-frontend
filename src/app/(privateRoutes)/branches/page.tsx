@@ -68,7 +68,14 @@ const Branches = () => {
               onClick: () => openModal("exclude", data),
             },
           ]}
-          mainItem={<ActionIcon variant="subtle" iconName="more-2" />}
+          mainItem={
+            <ActionIcon
+              name={`more-details-${data.nome}`}
+              aria-label="Mais detalhes"
+              variant="subtle"
+              iconName="more-2"
+            />
+          }
         />
       ),
     },
@@ -90,7 +97,7 @@ const Branches = () => {
       >
         {branches.isLoading && (
           <div className="w-full h-[80dvh] flex items-center justify-center">
-            <Loader width="bold" size="xl" color="border-brand500" />
+            <Loader width="bold" size="xl" color="border-brand-500" />
           </div>
         )}
         {branches.isError && <p>Ocorreu um erro ao carregar as filiais</p>}

@@ -1,5 +1,6 @@
 "use client";
 
+import ToastNotificationProvider from "@/core/contexts/ToastNotification.provider";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -8,10 +9,13 @@ function ProvidersWrapper({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [queryClient] = React.useState(() => new QueryClient());
-
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+  });
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <ToastNotificationProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </ToastNotificationProvider>
   );
 }
 
