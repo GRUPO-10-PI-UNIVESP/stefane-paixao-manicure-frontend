@@ -111,7 +111,7 @@ export const AddOrEditAppointmentModal = ({
                 label: branch.nome,
                 value: branch.filialId,
               }))}
-              onSelect={(option?: { label: string; value: string }) => {
+              onSelect={(option) => {
                 setValue("filialId", Number(option?.value));
               }}
               defaultValue={filialId}
@@ -126,7 +126,7 @@ export const AddOrEditAppointmentModal = ({
                 label: client.nomeCliente,
                 value: client.clienteId,
               }))}
-              onSelect={(option?: { label: string; value: string }) => {
+              onSelect={(option) => {
                 setValue("clienteId", Number(option?.value));
               }}
               defaultValue={clienteId}
@@ -141,7 +141,7 @@ export const AddOrEditAppointmentModal = ({
                 label: service.nomeServico,
                 value: service.servicoId,
               }))}
-              onSelect={(option?: { label: string; value: string }) => {
+              onSelect={(option) => {
                 setValue("servicoId", Number(option?.value));
               }}
               defaultValue={servicoId}

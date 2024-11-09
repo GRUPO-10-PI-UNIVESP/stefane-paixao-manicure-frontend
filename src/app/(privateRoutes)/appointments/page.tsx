@@ -38,24 +38,23 @@ const Appointments = () => {
     appointments.refetch();
   };
 
-  const groupedAppointments = appointments.data?.reduce(
-    (groups, appointment) => {
-      const date = appointment.dataFormatada.data;
+  const groupedAppointments = appointments.data?.reduce<
+    Record<string, Appointment[]>
+  >((groups, appointment) => {
+    const date = appointment.dataFormatada.data;
 
-      if (!groups[date]) {
-        groups[date] = [];
-      }
-      groups[date].push(appointment);
-      return groups;
-    },
-    {}
-  );
+    if (!groups[date]) {
+      groups[date] = [];
+    }
+    groups[date].push(appointment);
+    return groups;
+  }, {});
 
   const sortedDates = groupedAppointments
     ? Object.keys(groupedAppointments).sort((a, b) => {
         const dateA = parse(a, "dd/MM/yyyy", new Date());
         const dateB = parse(b, "dd/MM/yyyy", new Date());
-        return dateB - dateA;
+        return dateB.getTime() - dateA.getTime();
       })
     : [];
 
