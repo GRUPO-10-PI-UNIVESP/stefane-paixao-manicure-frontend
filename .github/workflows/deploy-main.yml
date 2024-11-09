@@ -40,10 +40,6 @@ jobs:
           source: .
           target: ~/
 
-      - name: List files after transfer
-        run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "ls -al ~"
-
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
