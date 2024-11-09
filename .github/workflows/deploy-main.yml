@@ -15,7 +15,6 @@ jobs:
       - name: Build image
         run: |
           docker build -t frontend_image .
-
       - name: Save image
         run: |
           docker save frontend_image -o frontend.tar
@@ -35,7 +34,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          key: $ {{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SERVERR_PASSPHRASE }}
           source: .
           target: ~/
@@ -52,5 +51,6 @@ jobs:
             docker stop frontend-container || true
             docker rm frontend-container || true
             docker rmi frontend_image || true
-            docker load -i frontend.tar.gz
+            docker load -i frontend.tar.gz 
             docker run --name frontend-container -d -p 80:3000 frontend_image
+            cd ~
