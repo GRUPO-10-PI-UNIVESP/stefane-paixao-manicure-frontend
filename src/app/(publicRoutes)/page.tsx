@@ -40,7 +40,12 @@ export default function Login() {
               : undefined
           }
         />
-        <PasswordInput grow label={"senha"} {...register("senha")} />
+        <PasswordInput
+          grow
+          label={"senha"}
+          {...register("senha")}
+          placeholder="Digite sua senha"
+        />
       </div>
 
       <Button
