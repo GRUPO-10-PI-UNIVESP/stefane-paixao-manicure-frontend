@@ -77,7 +77,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           className={`w-full mt-2 px-4 py-2 border ${
             dateError ? "border-red-500" : "border-gray-300"
           } rounded-md shadow-sm focus:outline-none focus:ring-2 ${
-            dateError ? "focus:ring-red-500" : "focus:ring-brand500"
+            dateError ? "focus:ring-red-500" : "focus:ring-brand-500"
           } focus:border-transparent`}
           aria-invalid={!!dateError}
           aria-describedby="dateError"
@@ -105,7 +105,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           className={`mt-2 px-4 py-2 border w-full ${
             timeError ? "border-red-500" : "border-gray-300"
           } rounded-md shadow-sm focus:outline-none focus:ring-2 ${
-            timeError ? "focus:ring-red-500" : "focus:ring-brand500"
+            timeError ? "focus:ring-red-500" : "focus:ring-brand-500"
           } focus:border-transparent`}
           aria-invalid={!!timeError}
           aria-describedby="timeError"

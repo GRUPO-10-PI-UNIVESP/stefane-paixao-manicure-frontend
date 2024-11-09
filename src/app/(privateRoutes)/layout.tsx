@@ -15,7 +15,7 @@ export default function AuthLayout({
       <div className="md:hidden block">
         <HamburgerMenu />
       </div>
-      <div className="w-full overflow-y-auto bg-neutral0 px-4 py-4">
+      <div className="w-full overflow-y-auto bg-neutral-50 px-4 py-4">
         <div className="bg-white rounded-lg px-4 py-6">{children}</div>
       </div>
     </main>

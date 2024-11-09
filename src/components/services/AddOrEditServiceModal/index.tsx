@@ -5,7 +5,7 @@ import {
   useUpdateService,
 } from "@/core/services/services/hooks";
 import { Service } from "@/core/services/services/types";
-import { Button, Modal, TextInput } from "@istic-ui/react";
+import { Button, Modal, NumberInput, TextInput } from "@istic-ui/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -19,39 +19,51 @@ export const AddOrEditServiceModal = ({
   selectedService,
   onClose,
 }: AddOrEditServiceModalProps) => {
-  const { register, setValue, handleSubmit, control } = useForm<Service>();
+  const { register, setValue, handleSubmit } = useForm<Service>();
   const registerServiceMutation = useCreateService();
   const editServiceMutation = useUpdateService();
   const isEdit = selectedService?.servicoId;
 
   async function handleRegisterService(data: Service) {
+    const convertedData: Service = {
+      ...data,
+      valorServico: Number(data.valorServico?.toString().replace(",", ".")),
+    };
+
     if (selectedService !== undefined) {
       await editServiceMutation.mutateAsync({
         servicoId: selectedService.servicoId,
-        data: data,
+        data: convertedData,
       });
     } else {
-      await registerServiceMutation.mutateAsync(data);
+      await registerServiceMutation.mutateAsync(convertedData);
     }
-    onClose();
+    handleOnClose();
   }
+
+  const handleOnClose = () => {
+    onClose();
+    setValue("nomeServico", "");
+    setValue("valorServico", undefined);
+  };
 
   useEffect(() => {
     if (selectedService !== undefined) {
       setValue("nomeServico", String(selectedService?.nomeServico));
       setValue("valorServico", selectedService?.valorServico);
     } else {
+      console.log("selectedService", selectedService);
       setValue("nomeServico", "");
       setValue("valorServico", undefined);
     }
-  }, [selectedService]);
+  }, [selectedService, setValue]);
 
   return (
     <Modal
       contentWidth={400}
       title={`${isEdit ? "Editar" : "Cadastrar"} Serviço`}
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={() => handleOnClose()}
     >
       <div className="flex flex-col w-full gap-6">
         <form onSubmit={handleSubmit((data) => handleRegisterService(data))}>
@@ -63,21 +75,23 @@ export const AddOrEditServiceModal = ({
               {...register("nomeServico")}
               required
             />
-            <TextInput
+            <NumberInput
               size="lg"
               label="Valor"
+              decimalSeparator=","
               placeholder="Adicione o valor do serviço"
               {...register("valorServico")}
+              onChange={(value) => setValue("valorServico", value)}
               required
             />
           </div>
 
-          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral100">
+          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral-100">
             <Button
               size="md"
               variant="outline"
               label="Cancelar"
-              onClick={() => onClose()}
+              onClick={() => handleOnClose()}
             />
             <Button
               isLoading={

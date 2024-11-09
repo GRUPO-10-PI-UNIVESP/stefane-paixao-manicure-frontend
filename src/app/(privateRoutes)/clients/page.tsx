@@ -54,7 +54,14 @@ const Clients = () => {
               onClick: () => openModal("exclude", data),
             },
           ]}
-          mainItem={<ActionIcon variant="subtle" iconName="more-2" />}
+          mainItem={
+            <ActionIcon
+              name={`more-details-${data.nomeCliente}`}
+              aria-label="Mais detalhes"
+              variant="subtle"
+              iconName="more-2"
+            />
+          }
         />
       ),
     },
@@ -76,7 +83,7 @@ const Clients = () => {
       >
         {clients.isLoading && (
           <div className="w-full h-[80dvh] flex items-center justify-center">
-            <Loader width="bold" size="xl" color="border-brand500" />
+            <Loader width="bold" size="xl" color="border-brand-500" />
           </div>
         )}
         {clients.isError && <p>Ocorreu um erro ao carregar os clientes</p>}

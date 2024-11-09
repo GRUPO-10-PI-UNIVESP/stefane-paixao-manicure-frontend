@@ -33,8 +33,13 @@ export const AddOrEditClientModal = ({
     } else {
       await registerClientMutation.mutateAsync(data);
     }
-    onClose();
+    handleOnClose();
   }
+  const handleOnClose = () => {
+    onClose();
+    setValue("nomeCliente", "");
+    setValue("numeroTelefone", "");
+  };
 
   useEffect(() => {
     if (selectedClient !== undefined) {
@@ -44,14 +49,14 @@ export const AddOrEditClientModal = ({
       setValue("nomeCliente", "");
       setValue("numeroTelefone", "");
     }
-  }, [selectedClient]);
+  }, [selectedClient, setValue]);
 
   return (
     <Modal
       contentWidth={400}
       title={`${isEdit ? "Editar" : "Cadastrar"} Cliente`}
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={() => handleOnClose()}
     >
       <div className="flex flex-col w-full gap-6">
         <form onSubmit={handleSubmit((data) => handleRegisterClient(data))}>
@@ -72,12 +77,12 @@ export const AddOrEditClientModal = ({
             />
           </div>
 
-          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral100">
+          <div className="w-full gap-2 flex flex-row items-center justify-end pt-6 border-t border-neutral-100">
             <Button
               size="md"
               variant="outline"
               label="Cancelar"
-              onClick={() => onClose()}
+              onClick={() => handleOnClose()}
             />
             <Button
               isLoading={
