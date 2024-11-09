@@ -40,6 +40,10 @@ jobs:
           source: .
           target: ~/
 
+      - name: List files after transfer
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "ls -al ~"
+
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -53,6 +57,4 @@ jobs:
             docker rm frontend-container || true
             docker rmi frontend_image || true
             docker load -i frontend.tar.gz
-            docker ps -a  # Verifica se o contêiner foi criado
             docker run --name frontend-container -d -p 80:3000 frontend_image  # Assumindo que o Next.js está na porta 3000
-            docker logs frontend-container  # Verifica os logs do contêiner
