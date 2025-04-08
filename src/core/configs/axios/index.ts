@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL:
-    "https://orca-app-8cyky.ondigitalocean.app/stefane-paixao-manicure-backend",
+  baseURL: "http://localhost:5000",
 });
 
 export default axiosInstance;

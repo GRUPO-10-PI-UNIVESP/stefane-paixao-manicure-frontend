@@ -1,4 +1,5 @@
 "use client";
+import { navigationItems } from "@/core/utils/navigationRoutes";
 import { ActionIcon, Button, Icon, SideBar, Text } from "@istic-ui/react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -6,33 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 export const Sidebar = () => {
   const path = usePathname();
   const router = useRouter();
-  const sideBarItems = [
-    {
-      title: "",
-      subItems: [
-        {
-          label: "Clientes",
-          path: "/clients",
-          icon: <Icon name="dashboard" />,
-        },
-        {
-          label: "Serviços",
-          path: "/services",
-          icon: <Icon name="survey" />,
-        },
-        {
-          label: "Filiais",
-          path: "/branches",
-          icon: <Icon name="home" />,
-        },
-        {
-          label: "Atendimento",
-          path: "/appointments",
-          icon: <Icon name="file-list" />,
-        },
-      ],
-    },
-  ];
+
   return (
     <SideBar
       width="250px"
@@ -48,7 +23,7 @@ export const Sidebar = () => {
         </div>
       }
       activeItem={path}
-      items={sideBarItems}
+      items={navigationItems}
       footer={
         <div className="flex flex-col gap-8">
           <Button

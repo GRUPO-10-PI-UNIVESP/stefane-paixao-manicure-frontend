@@ -1,5 +1,6 @@
 "use client";
 
+import { navigationItems } from "@/core/utils/navigationRoutes";
 import { ActionIcon, Button, Icon } from "@istic-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -8,27 +9,6 @@ import { useState } from "react";
 export const HamburgerMenu = () => {
   const [isOpened, setIsOpened] = useState(false);
   const router = useRouter();
-  const sideBarItems = [
-    {
-      subItems: [
-        {
-          label: "Clientes",
-          path: "/clients",
-          icon: <Icon name="dashboard" />,
-        },
-        {
-          label: "Serviços",
-          path: "/services",
-          icon: <Icon name="survey" />,
-        },
-        {
-          label: "Atendimento",
-          path: "/appointments",
-          icon: <Icon name="file-list" />,
-        },
-      ],
-    },
-  ];
 
   return (
     <div className="w-full md:px-4:py-6 flex flex-col items-center justify-between text-center relative">
@@ -49,7 +29,7 @@ export const HamburgerMenu = () => {
       </div>
       {isOpened && (
         <div className="absolute top-full left-0 w-full flex flex-col gap-t-4 bg-white z-30">
-          {sideBarItems.map((item, index) => (
+          {navigationItems.map((item, index) => (
             <div className="w-full" key={index}>
               {item.subItems.map((subItem, subIndex) => (
                 <div key={subIndex}>
