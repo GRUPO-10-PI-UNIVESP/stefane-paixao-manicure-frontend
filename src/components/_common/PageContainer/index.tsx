@@ -10,7 +10,7 @@ export const PageContainer = ({
   title: string;
   subtitle: string;
   children: ReactNode;
-  actionButton: ReactNode;
+  actionButton?: ReactNode;
 }) => {
   return (
     <div>
